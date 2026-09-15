@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lapor Gangguan - PLN PLTD Mindiptana</title>
+    <style>
+        :root { --pln-blue: #0082c8; --pln-dark: #005288; --pln-yellow: #ffeb3b; --bg: #f4f7f9; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: var(--bg); color: #333; }
+        header { background: linear-gradient(135deg, var(--pln-blue), var(--pln-dark)); color: white; padding: 1.5rem; text-align: center; border-bottom: 4px solid var(--pln-yellow); }
+        nav { background: var(--pln-dark); display: flex; justify-content: center; gap: 15px; padding: 10px; }
+        nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 5px 10px; }
+        nav a:hover { color: var(--pln-yellow); }
+        .container { max-width: 900px; margin: 25px auto; padding: 0 15px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 20px; border-left: 5px solid var(--pln-blue); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        .btn-submit { background-color: #25d366; color: white; border: none; padding: 12px; font-size: 0.95rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; }
+        footer { background: var(--pln-dark); color: white; text-align: center; padding: 15px; font-size: 0.85rem; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PLN PLTD MINDIPTANA</h1>
+        <p>Posko Pengaduan Gangguan & Layanan Pelanggan</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Beranda</a>
+        <a href="status.html">Status Kelistrikan</a>
+        <a href="jadwal.html">Jadwal Perbaikan</a>
+        <a href="pengaduan.html">Lapor Gangguan</a>
+        <a href="profil.html">Profil Unit</a>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2>🚨 Form Laporan Gangguan Listrik</h2>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">Silakan isi formulir di bawah ini untuk mengirim pesan pengaduan langsung ke WhatsApp petugas posko PLN Mindiptana:</p>
+
+            <form onsubmit="sendToWA(event)">
+                <div class="form-group">
+                    <label>Nama Pelapor:</label>
+                    <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <label>Kampung / Lokasi Gangguan:</label>
+                    <input type="text" id="lokasi" placeholder="Contoh: Kampung Mindiptana / Dekat Puskesmas" required>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Gangguan:</label>
+                    <select id="jenis">
+                        <option value="Listrik Padam di Rumah Saya">Listrik Padam di Rumah Saya</option>
+                        <option value="Listrik Padam Satu Kampung">Listrik Padam Satu Kampung</option>
+                        <option value="Pohon Tumbang Mengenai Kabel">Pohon Tumbang Mengenai Kabel</option>
+                        <option value="Percikan Api di Tiang/Kabel">Percikan Api di Tiang/Kabel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Detail Keterangan:</label>
+                    <textarea id="detail" rows="3" placeholder="Tambahkan keterangan jika ada..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">💬 Kirim Laporan via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Web Layanan Informasi PLTD Mindiptana - Boven Digoel</p>
+    </footer>
+
+    <script>
+        function sendToWA(e) {
+            e.preventDefault();
+            var noWA = "6281234567890"; // Ganti dengan nomor WA petugas
+            var nama = document.getElementById("nama").value;
+            var lokasi = document.getElementById("lokasi").value;
+            var jenis = document.getElementById("jenis").value;
+            var detail = document.getElementById("detail").value;
+
+            var pesan = "Halo Petugas PLN Mindiptana, saya melapor gangguan:%0A" +
+                        "*Nama:* " + nama + "%0A" +
+                        "*Lokasi:* " + lokasi + "%0A" +
+                        "*Jenis:* " + jenis + "%0A" +
+                        "*Detail:* " + (detail ? detail : "-");
+
+            window.open("https://wa.me/" + noWA + "?text=" + pesan, "_blank");
+        }
+    </script>
+</body>
+</html>

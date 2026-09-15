@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Informasi PLTD Mindiptana - PLN Perbatasan</title>
+    <title>Portal Resmi PLN PLTD Distrik Mindiptana</title>
     <style>
         :root {
             --pln-blue: #0082c8;
-            --pln-dark-blue: #005288;
-            --pln-yellow: #fff200;
+            --pln-dark: #005288;
+            --pln-yellow: #ffeb3b;
             --bg-gray: #f4f7f9;
         }
-        
+
         * {
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -25,48 +25,50 @@
             line-height: 1.6;
         }
 
-        /* Top Header / Branding PLN */
-        header {
-            background-color: var(--pln-blue);
+        /* Top Bar Sub-Header */
+        .top-bar {
+            background-color: #003a61;
             color: white;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            border-bottom: 5px solid var(--pln-yellow);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-size: 0.8rem;
+            padding: 6px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        header .badge-border {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 3px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+        /* Header Utama */
+        header {
+            background: linear-gradient(135deg, var(--pln-blue), var(--pln-dark));
+            color: white;
+            padding: 2.2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--pln-yellow);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
         header h1 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
         }
 
         header p {
             font-size: 0.95rem;
             opacity: 0.9;
+            margin-top: 5px;
         }
 
-        /* Navigation Bar */
+        /* Navigasi Utama */
         nav {
-            background-color: var(--pln-dark-blue);
+            background-color: var(--pln-dark);
             display: flex;
             justify-content: center;
-            gap: 15px;
-            padding: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 10px;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         nav a {
@@ -74,214 +76,170 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: color 0.2s;
+            padding: 6px 14px;
+            border-radius: 4px;
+            transition: all 0.2s;
         }
 
-        nav a:hover {
-            color: var(--pln-yellow);
+        nav a:hover, nav a.active {
+            color: var(--pln-dark);
+            background-color: var(--pln-yellow);
         }
 
-        /* Main Container */
+        /* Container & Grid Kartu */
         .container {
-            max-width: 900px;
-            margin: 20px auto;
+            max-width: 1000px;
+            margin: 25px auto;
             padding: 0 15px;
         }
 
-        .card {
+        .hero-card {
             background: white;
-            padding: 22px;
+            padding: 24px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            border-left: 4px solid var(--pln-blue);
-        }
-
-        .card h2 {
-            color: var(--pln-dark-blue);
-            font-size: 1.25rem;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Status Indicator Box */
-        .status-card {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
             border-left: 6px solid #2e7d32;
-            background: #f1f8e9;
         }
 
         .status-badge {
             display: inline-block;
             background-color: #2e7d32;
             color: white;
-            padding: 6px 14px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 0.85rem;
             margin-bottom: 10px;
         }
 
-        /* Grid Info */
-        .info-grid {
+        .grid-menu {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .info-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #e9ecef;
+        .card-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .info-item h4 {
-            font-size: 0.85rem;
-            color: #6c757d;
-            text-transform: uppercase;
+        .card-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .info-item p {
+        .card-item h3 {
+            color: var(--pln-dark);
+            margin-bottom: 10px;
             font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--pln-dark-blue);
-            margin-top: 3px;
         }
 
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
+        .card-item p {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 15px;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: background 0.2s;
-        }
-
-        .btn-wa {
-            background-color: #25d366;
-            color: white;
-        }
-
-        .btn-wa:hover {
-            background-color: #1eb954;
-        }
-
-        .btn-pln {
+        .btn-link {
+            display: inline-block;
             background-color: var(--pln-blue);
             color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: bold;
         }
 
-        .btn-pln:hover {
-            background-color: var(--pln-dark-blue);
+        .btn-link:hover {
+            background-color: var(--pln-dark);
         }
 
         /* Footer */
         footer {
-            text-align: center;
-            padding: 20px;
-            background: var(--pln-dark-blue);
+            background-color: var(--pln-dark);
             color: white;
+            text-align: center;
+            padding: 20px 15px;
             font-size: 0.85rem;
+            border-top: 4px solid var(--pln-yellow);
             margin-top: 40px;
-            border-top: 3px solid var(--pln-yellow);
         }
 
-        /* Responsive Adjustment */
         @media (max-width: 600px) {
-            header h1 { font-size: 1.3rem; }
-            nav { gap: 10px; font-size: 0.8rem; }
+            header h1 { font-size: 1.4rem; }
+            .top-bar { font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Branding -->
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span>📍 Distrik Mindiptana, Boven Digoel</span>
+        <span>🇮🇩 Wilayah Perbatasan RI - PNG</span>
+    </div>
+
+    <!-- Header -->
     <header>
-        <div class="badge-border">Wilayah Perbatasan RI - PNG</div>
         <h1>PLN PLTD MINDIPTANA</h1>
-        <p>Distrik Mindiptana, Kabupaten Boven Digoel, Papua Selatan</p>
+        <p>Layanan Informasi Kelistrikan Perbatasan Negara</p>
     </header>
 
-    <!-- Navigation -->
+    <!-- Navigasi Menu Penghubung -->
     <nav>
-        <a href="#status">Status Listrik</a>
-        <a href="#jadwal">Jadwal & Info</a>
-        <a href="#profil">Profil PLTD</a>
-        <a href="#posko">Posko Laporan</a>
+        <a href="index.html" class="active">Beranda</a>
+        <a href="status.html">Status Kelistrikan</a>
+        <a href="jadwal.html">Jadwal Perbaikan</a>
+        <a href="pengaduan.html">Lapor Gangguan</a>
+        <a href="profil.html">Profil Unit</a>
     </nav>
 
     <div class="container">
 
-        <!-- Status Pembangkit Utama -->
-        <section id="status" class="card status-card">
-            <h2>⚡ Status Pasokan Listrik Hari Ini</h2>
+        <!-- Status Cepat Ringkas -->
+        <div class="hero-card">
             <span class="status-badge">SISTEM OPERASIONAL NORMAL</span>
-            <p>Pembangkit Listrik Tenaga Diesel (PLTD) Mindiptana beroperasi menyuplai energi ke seluruh jaringan distribusi Distrik Mindiptana.</p>
+            <h2>Selamat Datang di Portal PLN Mindiptana</h2>
+            <p>Pembangkit Listrik Tenaga Diesel (PLTD) Mindiptana menyuplai listrik secara optimal untuk mendukung aktivitas masyarakat, fasilitas umum, dan pertahanan kawasan perbatasan RI-PNG.</p>
+        </div>
+
+        <h2 style="color: var(--pln-dark); margin-bottom: 15px;">Pusat Layanan & Informasi</h2>
+
+        <!-- Grid Menu Ke 4 Halaman -->
+        <div class="grid-menu">
             
-            <div class="info-grid">
-                <div class="info-item">
-                    <h4>Jam Operasional</h4>
-                    <p>24 Jam / Hari</p>
-                </div>
-                <div class="info-item">
-                    <h4>Status Beban</h4>
-                    <p>Aman / Cukup</p>
-                </div>
-                <div class="info-item">
-                    <h4>Cakupan Wilayah</h4>
-                    <p>Mindiptana & Sebagian Kampung Sekitar</p>
-                </div>
+            <div class="card-item">
+                <h3>⚡ Status Kelistrikan</h3>
+                <p>Cek transparansi beban listrik, daya terpasang, dan cadangan energi pembangkit.</p>
+                <a href="status.html" class="btn-link">Lihat Status</a>
             </div>
-        </section>
 
-        <!-- Informasi Pemeliharaan & Pengumuman -->
-        <section id="jadwal" class="card">
-            <h2>📢 Pengumuman & Jadwal Pemeliharaan</h2>
-            <p><strong>Status Pemadaman Terencana:</strong> Tidak ada jadwal pemadaman bergilir untuk hari ini.</p>
-            <br>
-            <p style="font-size: 0.9rem; color: #555;">
-                <em>*Catatan: Pemeliharaan jaringan/pemangkasan pohon di sepanjang jalur kabel utama dilakukan secara berkala demi menjaga keamanan dan kelancaran aliran listrik.</em>
-            </p>
-        </section>
-
-        <!-- Profil Singkat PLTD -->
-        <section id="profil" class="card">
-            <h2>🏢 Profil Unit PLTD Mindiptana</h2>
-            <p>
-                PLTD Mindiptana merupakan unit pembangkit kelistrikan PLN yang beroperasi di kawasan strategis perbatasan Negara Kesatuan Republik Indonesia. Pembangkit ini berfungsi melayani kebutuhan energi listrik bagi masyarakat, instansi pemerintah, fasilitas kesehatan (Puskesmas), pos perbatasan, serta sektor perekonomian di Distrik Mindiptana.
-            </p>
-        </section>
-
-        <!-- Pengaduan Gangguan -->
-        <section id="posko" class="card">
-            <h2>📞 Posko Laporan Gangguan & Pelayanan</h2>
-            <p>
-                Jika terjadi gangguan jaringan (tiang roboh, kabel tertimpa pohon, atau meteran listrik bermasalah), silakan hubungi posko layanan terdekat:
-            </p>
-
-            <div class="btn-group">
-                <!-- Gantilah nomor 628xxxxxxxxxx dengan nomor WA Petugas PLN Mindiptana -->
-                <a href="https://wa.me/6281234567890?text=Halo%20Petugas%20PLTD%20Mindiptana,%20saya%20ingin%20melaporkan%20gangguan%20listrik" class="btn btn-wa" target="_blank">
-                    💬 Hubungi Posko via WhatsApp
-                </a>
-                <a href="https://layanan.pln.co.id/" class="btn btn-pln" target="_blank">
-                    🌐 Portal Layanan PLN Resmi
-                </a>
+            <div class="card-item">
+                <h3>📢 Jadwal Perbaikan</h3>
+                <p>Informasi pemeliharaan kawat jaringan dan jadwal pemadaman terencana.</p>
+                <a href="jadwal.html" class="btn-link">Lihat Jadwal</a>
             </div>
+
+            <div class="card-item">
+                <h3>🚨 Lapor Gangguan</h3>
+                <p>Kirim pesan pengaduan tiang tumbang/mati lampu langsung ke WhatsApp Posko.</p>
+                <a href="pengaduan.html" class="btn-link" style="background-color: #25d366;">Lapor via WA</a>
+            </div>
+
+            <div class="card-item">
+                <h3>🏢 Profil Unit PLTD</h3>
+                <p>Mengenal lebih dekat cakupan wilayah penyuplaian dan fasilitas PLTD Mindiptana.</p>
+                <a href="profil.html" class="btn-link">Lihat Profil</a>
+            </div>
+
         </div>
 
     </div>
