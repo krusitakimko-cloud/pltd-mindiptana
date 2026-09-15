@@ -6,17 +6,27 @@
     <title>Lapor Gangguan - PLN PLTD Mindiptana</title>
     <style>
         :root { --pln-blue: #0082c8; --pln-dark: #005288; --pln-yellow: #ffeb3b; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: var(--bg); color: #333; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: var(--bg); color: #333; line-height: 1.6; }
         header { background: linear-gradient(135deg, var(--pln-blue), var(--pln-dark)); color: white; padding: 1.5rem; text-align: center; border-bottom: 4px solid var(--pln-yellow); }
-        nav { background: var(--pln-dark); display: flex; justify-content: center; gap: 15px; padding: 10px; }
-        nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 5px 10px; }
-        nav a:hover { color: var(--pln-yellow); }
-        .container { max-width: 900px; margin: 25px auto; padding: 0 15px; }
-        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 20px; border-left: 5px solid var(--pln-blue); }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        .btn-submit { background-color: #25d366; color: white; border: none; padding: 12px; font-size: 0.95rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; }
+        nav { background: var(--pln-dark); display: flex; justify-content: center; gap: 12px; padding: 10px; flex-wrap: wrap; }
+        nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 6px 12px; border-radius: 4px; }
+        nav a:hover, nav a.active { color: var(--pln-dark); background-color: var(--pln-yellow); }
+        
+        .container { max-width: 800px; margin: 25px auto; padding: 0 15px; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid var(--pln-blue); }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label.title { display: block; font-weight: bold; margin-bottom: 6px; color: var(--pln-dark); }
+        .form-group input[type="text"], .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        
+        /* Styling Radio & Checkbox */
+        .option-group { background: #f9f9f9; padding: 12px; border-radius: 6px; border: 1px solid #eee; }
+        .option-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; }
+        .option-item:last-child { margin-bottom: 0; }
+        .option-item input { cursor: pointer; }
+
+        .btn-submit { background-color: #25d366; color: white; border: none; padding: 12px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .btn-submit:hover { background-color: #1eb954; }
         footer { background: var(--pln-dark); color: white; text-align: center; padding: 15px; font-size: 0.85rem; margin-top: 40px; }
     </style>
 </head>
@@ -30,37 +40,68 @@
         <a href="index.html">Beranda</a>
         <a href="status.html">Status Kelistrikan</a>
         <a href="jadwal.html">Jadwal Perbaikan</a>
-        <a href="pengaduan.html">Lapor Gangguan</a>
+        <a href="pengaduan.html" class="active">Lapor Gangguan</a>
         <a href="profil.html">Profil Unit</a>
     </nav>
 
     <div class="container">
         <div class="card">
             <h2>🚨 Form Laporan Gangguan Listrik</h2>
-            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">Silakan isi formulir di bawah ini untuk mengirim pesan pengaduan langsung ke WhatsApp petugas posko PLN Mindiptana:</p>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 20px;">Lengkapi detail di bawah ini. Pengaduan akan diformat otomatis dan dikirim langsung ke WhatsApp Posko PLN Mindiptana.</p>
 
             <form onsubmit="sendToWA(event)">
+                <!-- Input Teks Biasa -->
                 <div class="form-group">
-                    <label>Nama Pelapor:</label>
-                    <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+                    <label class="title">Nama Pelapor:</label>
+                    <input type="text" id="nama" placeholder="Contoh: Bpk. Yohanes" required>
                 </div>
+
                 <div class="form-group">
-                    <label>Kampung / Lokasi Gangguan:</label>
+                    <label class="title">Kampung / Lokasi Gangguan:</label>
                     <input type="text" id="lokasi" placeholder="Contoh: Kampung Mindiptana / Dekat Puskesmas" required>
                 </div>
+
+                <!-- RADIO BUTTON: Pilih SALAH SATU golongan pelanggan -->
                 <div class="form-group">
-                    <label>Jenis Gangguan:</label>
-                    <select id="jenis">
-                        <option value="Listrik Padam di Rumah Saya">Listrik Padam di Rumah Saya</option>
-                        <option value="Listrik Padam Satu Kampung">Listrik Padam Satu Kampung</option>
-                        <option value="Pohon Tumbang Mengenai Kabel">Pohon Tumbang Mengenai Kabel</option>
-                        <option value="Percikan Api di Tiang/Kabel">Percikan Api di Tiang/Kabel</option>
-                    </select>
+                    <label class="title">Kategori Pelanggan (Pilih salah satu):</label>
+                    <div class="option-group">
+                        <label class="option-item">
+                            <input type="radio" name="kategori" value="Rumah Tangga (R-1)" checked> Rumah Tangga / Warga
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="kategori" value="Fasilitas Umum (Puskesmas/Sekolah/Gereja)"> Fasilitas Umum (Sekolah / Puskesmas / Rumah Ibadah)
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="kategori" value="Instansi Pemerintah / Pos Perbatasan"> Instansi / Kantor / Pos Perbatasan
+                        </label>
+                    </div>
                 </div>
+
+                <!-- CHECKBOX: Pilih LEBIH DARI SATU gejala yang dialami -->
                 <div class="form-group">
-                    <label>Detail Keterangan:</label>
-                    <textarea id="detail" rows="3" placeholder="Tambahkan keterangan jika ada..."></textarea>
+                    <label class="title">Gejala Gangguan (Bisa pilih lebih dari satu):</label>
+                    <div class="option-group">
+                        <label class="option-item">
+                            <input type="checkbox" name="gejala" value="Listrik Mati Total"> Listrik Mati Total
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" name="gejala" value="Lampu Redup / Naik Turun"> Lampu Redup / Voltase Naik Turun
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" name="gejala" value="Tetangga Ikut Padam"> Tetangga Sekitar Juga Padam
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" name="gejala" value="Kabel/Tiang Ada Percikan Api"> Ada Percikan Api di Kabel / Tiang
+                        </label>
+                    </div>
                 </div>
+
+                <!-- Textarea Detail -->
+                <div class="form-group">
+                    <label class="title">Catatan Tambahan:</label>
+                    <textarea id="detail" rows="3" placeholder="Masukkan keterangan tambahan jika ada..."></textarea>
+                </div>
+
                 <button type="submit" class="btn-submit">💬 Kirim Laporan via WhatsApp</button>
             </form>
         </div>
@@ -70,21 +111,37 @@
         <p>&copy; 2026 Web Layanan Informasi PLTD Mindiptana - Boven Digoel</p>
     </footer>
 
+    <!-- JavaScript untuk Membaca Radio Button & Checkbox lalu Mengirim ke WA -->
     <script>
         function sendToWA(e) {
             e.preventDefault();
-            var noWA = "6281234567890"; // Ganti dengan nomor WA petugas
+            var noWA = "6281234567890"; // Ganti dengan nomor WA petugas PLN
+
             var nama = document.getElementById("nama").value;
             var lokasi = document.getElementById("lokasi").value;
-            var jenis = document.getElementById("jenis").value;
             var detail = document.getElementById("detail").value;
 
-            var pesan = "Halo Petugas PLN Mindiptana, saya melapor gangguan:%0A" +
-                        "*Nama:* " + nama + "%0A" +
-                        "*Lokasi:* " + lokasi + "%0A" +
-                        "*Jenis:* " + jenis + "%0A" +
-                        "*Detail:* " + (detail ? detail : "-");
+            // Membaca Pilihan Radio Button
+            var kategoriElemen = document.querySelector('input[name="kategori"]:checked');
+            var kategori = kategoriElemen ? kategoriElemen.value : "-";
 
+            // Membaca Pilihan Checkbox (Bisa lebih dari 1)
+            var gejalaTerpilih = [];
+            var checkboxs = document.querySelectorAll('input[name="gejala"]:checked');
+            checkboxs.forEach(function(item) {
+                gejalaTerpilih.push(item.value);
+            });
+            var gejalaText = gejalaTerpilih.length > 0 ? gejalaTerpilih.join(", ") : "Tidak ditentukan";
+
+            // Format Pesan WhatsApp
+            var pesan = "Halo Petugas PLN Mindiptana, saya melapor gangguan:%0A%0A" +
+                        "*Nama Pelapor:* " + nama + "%0A" +
+                        "*Lokasi:* " + lokasi + "%0A" +
+                        "*Kategori:* " + kategori + "%0A" +
+                        "*Gejala Gangguan:* " + gejalaText + "%0A" +
+                        "*Catatan:* " + (detail ? detail : "-");
+
+            // Buka WhatsApp
             window.open("https://wa.me/" + noWA + "?text=" + pesan, "_blank");
         }
     </script>
