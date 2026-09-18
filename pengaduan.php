@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Informasi PLTD Mindiptana</title>
+    <title>Lapor Lampu Mati - PLN PLTD Mindiptana</title>
     <style>
         :root {
             --pln-blue: #0082c8;
@@ -43,7 +43,7 @@
         }
 
         .header-top {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 12px 20px;
             display: flex;
@@ -97,17 +97,11 @@
         }
 
         .nav-container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
             overflow-x: auto;
             white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
         }
 
         .nav-container a {
@@ -128,86 +122,72 @@
             border-bottom: 3px solid var(--pln-yellow);
         }
 
-        /* Tombol Khusus Admin/Petugas */
-        .btn-admin-nav {
-            background-color: #d97706 !important;
-            color: white !important;
-            border-radius: 6px;
-            padding: 8px 14px !important;
-            margin: 6px 10px;
-            border-bottom: none !important;
-        }
-
-        .btn-admin-nav:hover {
-            background-color: #b45309 !important;
-        }
-
-        .hero-banner {
+        .page-banner {
             background: linear-gradient(135deg, #005288 0%, #0082c8 100%);
             color: white;
-            padding: 35px 20px 45px;
+            padding: 25px 20px 35px;
             text-align: center;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
         }
 
-        .hero-banner h2 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .hero-banner p {
-            font-size: 0.95rem;
-            color: #e2e8f0;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         .main-container {
-            max-width: 1000px;
-            margin: -25px auto 40px;
+            max-width: 900px;
+            margin: -20px auto 40px;
             padding: 0 16px;
         }
 
-        .grid-menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-        }
-
-        .card-menu {
+        .card-form {
             background: #ffffff;
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: 0 8px 20px rgba(0,82,136,0.06);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0,82,136,0.08);
             border: 1px solid #e2e8f0;
-            transition: transform 0.2s;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            margin-bottom: 24px;
         }
 
-        .card-menu:hover {
-            transform: translateY(-4px);
-            border-color: var(--pln-blue);
+        .form-group {
+            margin-bottom: 18px;
         }
 
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .card-menu h3 {
-            font-size: 1.1rem;
+        .form-group label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 700;
             color: var(--pln-dark);
             margin-bottom: 6px;
         }
 
-        .card-menu p {
-            font-size: 0.85rem;
-            color: #64748b;
+        .form-control {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: #1e293b;
+            background-color: #f8fafc;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--pln-blue);
+            background-color: #ffffff;
+        }
+
+        .btn-submit {
+            background-color: var(--pln-blue);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--pln-dark);
         }
 
         footer {
@@ -241,57 +221,69 @@
 
         <nav class="main-nav">
             <div class="nav-container">
-                <div class="nav-links">
-                    <a href="index.html" class="active">🏠 Beranda</a>
-                    <a href="status.php">💡 Status Listrik</a>
-                    <a href="jadwal.html">📅 Jadwal Perbaikan</a>
-                    <a href="pengaduan.php">📝 Lapor Lampu Mati</a>
-                    <a href="profil.html">🏢 Profil PLTD</a>
-                </div>
-                <!-- Tombol Akses Panel Admin -->
-                <a href="admin.php" class="btn-admin-nav">🛠️ Panel Admin</a>
+                <a href="index.html">🏠 Beranda</a>
+                <a href="status.php">💡 Status Listrik</a>
+                <a href="jadwal.html">📅 Jadwal Perbaikan</a>
+                <a href="pengaduan.php" class="active">📝 Lapor Lampu Mati</a>
+                <a href="profil.html">🏢 Profil PLTD</a>
             </div>
         </nav>
     </header>
 
-    <section class="hero-banner">
-        <h2>Layanan Informasi Kelistrikan Distrik Mindiptana</h2>
-        <p>Pusat pengaduan gangguan dan pemantauan status kelistrikan masyarakat Distrik Mindiptana</p>
+    <section class="page-banner">
+        <h2>Formulir Laporan Gangguan Listrik</h2>
+        <p>Isi data di bawah ini untuk melaporkan masalah kelistrikan ke petugas</p>
     </section>
 
     <main class="main-container">
-        <div class="grid-menu">
-            <a href="pengaduan.php" class="card-menu">
-                <div>
-                    <div class="card-icon">📝</div>
-                    <h3>Lapor Lampu Mati</h3>
-                    <p>Laporkan masalah pemadaman listrik, kabel putus, atau gangguan teknis.</p>
+        <div class="card-form">
+            <!-- Action mengarah tepat ke simpan.php -->
+            <form action="simpan.php" method="POST">
+                
+                <div class="form-group">
+                    <label>Nama Pelapor:</label>
+                    <input type="text" name="nama_pelapor" class="form-control" placeholder="Nama Lengkap" required>
                 </div>
-            </a>
 
-            <a href="status.php" class="card-menu">
-                <div>
-                    <div class="card-icon">💡</div>
-                    <h3>Status Listrik</h3>
-                    <p>Pantau status penanganan pengaduan warga secara real-time.</p>
+                <div class="form-group">
+                    <label>No. HP / WhatsApp:</label>
+                    <input type="text" name="no_hp" class="form-control" placeholder="Contoh: 081234567890" required>
                 </div>
-            </a>
 
-            <a href="admin.php" class="card-menu" style="border-left: 4px solid #d97706;">
-                <div>
-                    <div class="card-icon">🛠️</div>
-                    <h3>Kelola Pengaduan</h3>
-                    <p>Khusus Petugas PLTD untuk memperbarui status pengaduan warga.</p>
+                <div class="form-group">
+                    <label>Lokasi / Kampung:</label>
+                    <select name="lokasi" class="form-control" required>
+                        <option value="">-- Pilih Lokasi Kampung --</option>
+                        <option value="Kampung Mindiptana">Kampung Mindiptana</option>
+                        <option value="Kampung Imko">Kampung Imko</option>
+                        <option value="Kampung Osso">Kampung Osso</option>
+                        <option value="Kampung Tinggam">Kampung Tinggam</option>
+                    </select>
                 </div>
-            </a>
 
-            <a href="jadwal.html" class="card-menu">
-                <div>
-                    <div class="card-icon">📅</div>
-                    <h3>Jadwal Perbaikan</h3>
-                    <p>Cek jadwal pemeliharaan jaringan listrik rutin.</p>
+                <div class="form-group">
+                    <label>Kategori Gangguan:</label>
+                    <select name="kategori" class="form-control" required>
+                        <option value="Lampu Padam">Lampu Padam</option>
+                        <option value="Kabel Putus">Kabel Putus</option>
+                        <option value="Tiang Bermasalah">Tiang Bermasalah</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
                 </div>
-            </a>
+
+                <div class="form-group">
+                    <label>Gejala Gangguan:</label>
+                    <input type="text" name="gejala" class="form-control" placeholder="Contoh: Lampu redup / Mati total" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Catatan Tambahan:</label>
+                    <textarea name="catatan" class="form-control" rows="3" placeholder="Jelaskan patokan rumah atau detail lainnya"></textarea>
+                </div>
+
+                <button type="submit" name="submit" class="btn-submit">📤 Kirimkan Laporan ke Posko</button>
+
+            </form>
         </div>
     </main>
 

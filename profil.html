@@ -3,47 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Unit - PLN PLTD Mindiptana</title>
+    <title>Profil PLTD - PLN PLTD Mindiptana</title>
     <style>
-        :root { --pln-blue: #0082c8; --pln-dark: #005288; --pln-yellow: #ffeb3b; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: var(--bg); color: #333; }
-        header { background: linear-gradient(135deg, var(--pln-blue), var(--pln-dark)); color: white; padding: 1.5rem; text-align: center; border-bottom: 4px solid var(--pln-yellow); }
-        nav { background: var(--pln-dark); display: flex; justify-content: center; gap: 15px; padding: 10px; }
-        nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 5px 10px; }
-        nav a:hover { color: var(--pln-yellow); }
-        .container { max-width: 900px; margin: 25px auto; padding: 0 15px; }
-        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 20px; border-left: 5px solid var(--pln-blue); }
-        footer { background: var(--pln-dark); color: white; text-align: center; padding: 15px; font-size: 0.85rem; margin-top: 40px; }
+        :root {
+            --pln-blue: #0082c8;
+            --pln-dark: #005288;
+            --pln-yellow: #ffc107;
+            --bg-body: #f4f7f9;
+            --wa-color: #25d366;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        /* Running Text / Pengumuman Atas */
+        .papan-pengumuman {
+            background: linear-gradient(90deg, #b71c1c, #d32f2f);
+            color: #ffffff;
+            padding: 8px 15px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        /* Header & Navigasi Atas */
+        header {
+            background-color: var(--pln-dark);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .header-top {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: var(--pln-yellow);
+            color: var(--pln-dark);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.15rem;
+            line-height: 1.1;
+            color: #ffffff;
+        }
+
+        .logo-text span {
+            color: var(--pln-yellow);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .tag-wilayah {
+            background-color: rgba(255,255,255,0.15);
+            color: #ffffff;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Navigasi Menu Atas */
+        .main-nav {
+            background-color: #003e68;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-container a {
+            color: #d0e7ff;
+            text-decoration: none;
+            padding: 12px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-container a:hover,
+        .nav-container a.active {
+            color: #ffffff;
+            background-color: rgba(255,255,255,0.08);
+            border-bottom: 3px solid var(--pln-yellow);
+        }
+
+        /* Banner Header Halaman */
+        .page-banner {
+            background: linear-gradient(135deg, #005288 0%, #0082c8 100%);
+            color: white;
+            padding: 25px 20px 35px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .page-banner h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .page-banner p {
+            font-size: 0.88rem;
+            color: #e0f2fe;
+        }
+
+        /* Pembungkus Utama Konten */
+        .main-container {
+            max-width: 900px;
+            margin: -20px auto 40px;
+            padding: 0 16px;
+        }
+
+        /* Card Tentang PLTD */
+        .card-about {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(0,82,136,0.08);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+        }
+
+        .card-about h3 {
+            font-size: 1.15rem;
+            color: var(--pln-dark);
+            margin-bottom: 12px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 8px;
+        }
+
+        .card-about p {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* Grid Data Spesifikasi PLTD */
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--pln-dark);
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        .grid-spec {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .spec-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+        }
+
+        .spec-card .icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+
+        .spec-card h4 {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-card p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--pln-dark);
+            margin-top: 4px;
+        }
+
+        /* Card Wilayah Pelayanan */
+        .card-wilayah {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+        }
+
+        .card-wilayah h4 {
+            font-size: 1rem;
+            color: var(--pln-dark);
+            margin-bottom: 10px;
+        }
+
+        .card-wilayah ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+
+        .card-wilayah li {
+            background: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Tombol WA Posko */
+        .btn-wa-posko {
+            background-color: var(--wa-color);
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 8px 18px rgba(37, 211, 102, 0.3);
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.82rem;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>PLN PLTD MINDIPTANA</h1>
-        <p>Profil Unit Pembangkit Listrik Tenaga Diesel Perbatasan</p>
-    </header>
 
-    <nav>
-        <a href="index.html">Beranda</a>
-        <a href="status.html">Status Kelistrikan</a>
-        <a href="jadwal.html">Jadwal Perbaikan</a>
-        <a href="pengaduan.html">Lapor Gangguan</a>
-        <a href="profil.html">Profil Unit</a>
-    </nav>
-
-    <div class="container">
-        <div class="card">
-            <h2>🏢 Profil Singkat</h2>
-            <p>Pembangkit Listrik Tenaga Diesel (PLTD) Mindiptana merupakan salah satu unit operasional kelistrikan PLN di wilayah perbatasan Indonesia (RI - Papua Nugini), Distrik Mindiptana, Kabupaten Boven Digoel, Papua Selatan.</p>
-        </div>
-
-        <div class="card">
-            <h2>📍 Wilayah Cakupan Layanan</h2>
-            <p>Unit PLTD ini bertugas menyediakan energi listrik untuk mendukung pemukiman warga, puskesmas, instansi pemerintah distrik, pos pertahanan perbatasan, serta aktivitas ekonomi masyarakat lokal di Distrik Mindiptana dan sekitarnya.</p>
-        </div>
+    <!-- Running Text Pengumuman -->
+    <div class="papan-pengumuman">
+        <marquee behavior="scroll" direction="left">
+            📢 POSKO PLTD MINDIPTANA: Pembangkit listrik beroperasi normal. Silakan buat laporan jika ada gangguan listrik atau kabel putus di kampung Anda.
+        </marquee>
     </div>
 
+    <!-- Header & Navigasi Atas -->
+    <header>
+        <div class="header-top">
+            <div class="logo-box">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-text">
+                    <h1>PLN <span>PLTD Mindiptana</span></h1>
+                </div>
+            </div>
+            <span class="tag-wilayah">Perbatasan PNG</span>
+        </div>
+
+        <!-- NAVIGASI MENU ATAS -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a href="index.html">🏠 Beranda</a>
+                <a href="status.html">💡 Status Listrik</a>
+                <a href="jadwal.html">📅 Jadwal Perbaikan</a>
+                <a href="pengaduan.html">📝 Lapor Lampu Mati</a>
+                <a href="profil.html" class="active">🏢 Profil PLTD</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner Header Halaman -->
+    <section class="page-banner">
+        <h2>Profil PLTD Mindiptana</h2>
+        <p>Mengenal unit pembangkit listrik dan jangkauan pelayanan di wilayah perbatasan</p>
+    </section>
+
+    <!-- Konten Utama -->
+    <main class="main-container">
+
+        <!-- Deskripsi Singkat PLTD -->
+        <div class="card-about">
+            <h3>🏢 Tentang Posko PLTD Mindiptana</h3>
+            <p>Pembangkit Listrik Tenaga Diesel (PLTD) Mindiptana merupakan unit pelayanan kelistrikan di bawah PLN Sub Rayon Tanah Merah, Kabupaten Boven Digoel. PLTD ini berdiri khusus untuk melayani kebutuhan daya listrik masyarakat, fasilitas publik, dan perkantoran pemerintahan di Distrik Mindiptana dan sekitarnya.</p>
+            <p>Sebagai salah satu sarana vital di wilayah perbatasan Indonesia – Papua Nugini (PNG), Posko PLTD Mindiptana berkomitmen menjaga pasokan kelistrikan yang andal, aman, serta tanggap melayani setiap keluhan dan pengaduan gangguan dari warga kampung.</p>
+        </div>
+
+        <!-- Spesifikasi Teknik & Operasional -->
+        <div class="section-title">Spesifikasi Operasional</div>
+        <div class="grid-spec">
+            <div class="spec-card">
+                <div class="icon">⚙️</div>
+                <h4>Jumlah Unit Mesin</h4>
+                <p>3 Unit Generator</p>
+            </div>
+
+            <div class="spec-card">
+                <div class="icon">⚡</div>
+                <h4>Total Kapasitas</h4>
+                <p>500 kW</p>
+            </div>
+
+            <div class="spec-card">
+                <div class="icon">🕒</div>
+                <h4>Jam Pelayanan</h4>
+                <p>24 Jam / Hari</p>
+            </div>
+
+            <div class="spec-card">
+                <div class="icon">📍</div>
+                <h4>Wilayah Kerja</h4>
+                <p>Distrik Mindiptana</p>
+            </div>
+        </div>
+
+        <!-- Wilayah Cakupan Distribusi -->
+        <div class="card-wilayah">
+            <h4>🗺️ Wilayah Jangkauan Distribusi Listrik:</h4>
+            <ul>
+                <li>📍 Kampung Mindiptana</li>
+                <li>📍 Kampung Imko</li>
+                <li>📍 Kampung Osso</li>
+                <li>📍 Kampung Tinggam</li>
+                <li>📍 Area Pasar Mindiptana</li>
+                <li>📍 Kompleks Puskesmas & Sekolah</li>
+            </ul>
+        </div>
+
+        <!-- Tombol WA Posko -->
+        <a href="https://wa.me/6281234567890?text=Halo%20Posko%20PLTD%20Mindiptana,%20saya%20ingin%20bertanya%20seputar%20layanan." target="_blank" class="btn-wa-posko">
+            💬 Kontak Langsung Petugas PLTD via WhatsApp
+        </a>
+
+    </main>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Web Layanan Informasi PLTD Mindiptana - Boven Digoel</p>
+        <p><strong>PLN PLTD Distrik Mindiptana</strong></p>
+        <p style="margin-top: 5px;">Sub Rayon Tanah Merah — Wilayah Perbatasan RI - PNG</p>
+        <p style="margin-top: 10px; font-size: 0.75rem; color: #64748b;">&copy; 2026 Layanan Informasi Kelistrikan Masyarakat Kampung.</p>
     </footer>
+
 </body>
 </html>

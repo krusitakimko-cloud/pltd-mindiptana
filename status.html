@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Listrik - PLN PLTD Mindiptana</title>
+    <style>
+        :root {
+            --pln-blue: #0082c8;
+            --pln-dark: #005288;
+            --pln-yellow: #ffc107;
+            --bg-body: #f4f7f9;
+            --wa-color: #25d366;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        /* Running Text / Pengumuman Atas */
+        .papan-pengumuman {
+            background: linear-gradient(90deg, #b71c1c, #d32f2f);
+            color: #ffffff;
+            padding: 8px 15px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        /* Header & Navigasi Atas */
+        header {
+            background-color: var(--pln-dark);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .header-top {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: var(--pln-yellow);
+            color: var(--pln-dark);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.15rem;
+            line-height: 1.1;
+            color: #ffffff;
+        }
+
+        .logo-text span {
+            color: var(--pln-yellow);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .tag-wilayah {
+            background-color: rgba(255,255,255,0.15);
+            color: #ffffff;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Navigasi Menu Atas */
+        .main-nav {
+            background-color: #003e68;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-container a {
+            color: #d0e7ff;
+            text-decoration: none;
+            padding: 12px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-container a:hover,
+        .nav-container a.active {
+            color: #ffffff;
+            background-color: rgba(255,255,255,0.08);
+            border-bottom: 3px solid var(--pln-yellow);
+        }
+
+        /* Banner Header Halaman */
+        .page-banner {
+            background: linear-gradient(135deg, #005288 0%, #0082c8 100%);
+            color: white;
+            padding: 25px 20px 35px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .page-banner h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .page-banner p {
+            font-size: 0.88rem;
+            color: #e0f2fe;
+        }
+
+        /* Pembungkus Utama Konten */
+        .main-container {
+            max-width: 900px;
+            margin: -20px auto 40px;
+            padding: 0 16px;
+        }
+
+        /* Card Rincian Pembangkit Utama */
+        .card-pembangkit {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,82,136,0.08);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+        }
+
+        .card-pembangkit h3 {
+            font-size: 1.1rem;
+            color: var(--pln-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 8px;
+        }
+
+        .grid-info-mesin {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .box-info-item {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .box-info-item span.title {
+            font-size: 0.78rem;
+            color: #64748b;
+            display: block;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .box-info-item span.val {
+            font-size: 1.05rem;
+            color: var(--pln-dark);
+            font-weight: 700;
+            margin-top: 2px;
+            display: block;
+        }
+
+        /* Status Per Kampung (Tabel / List Visual) */
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--pln-dark);
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        .kampung-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .kampung-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 14px 18px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .kampung-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #2d3748;
+        }
+
+        .kampung-sub {
+            font-size: 0.78rem;
+            color: #718096;
+        }
+
+        .badge-status {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-nyala {
+            background-color: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .status-bergilir {
+            background-color: #fffbeb;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .status-padam {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot-green { background-color: var(--success-color); }
+        .dot-yellow { background-color: var(--warning-color); }
+        .dot-red { background-color: var(--danger-color); }
+
+        /* Catatan Update Petugas */
+        .catatan-box {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            margin-bottom: 24px;
+        }
+
+        .catatan-box h4 {
+            font-size: 0.95rem;
+            color: var(--pln-dark);
+            margin-bottom: 6px;
+        }
+
+        .catatan-box p {
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+
+        /* Tombol WA Posko */
+        .btn-wa-posko {
+            background-color: var(--wa-color);
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 8px 18px rgba(37, 211, 102, 0.3);
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.82rem;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Running Text Pengumuman -->
+    <div class="papan-pengumuman">
+        <marquee behavior="scroll" direction="left">
+            📢 POSKO PLTD MINDIPTANA: Pembangkit listrik beroperasi normal. Silakan buat laporan jika ada gangguan listrik atau kabel putus di kampung Anda.
+        </marquee>
+    </div>
+
+    <!-- Header & Navigasi Atas -->
+    <header>
+        <div class="header-top">
+            <div class="logo-box">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-text">
+                    <h1>PLN <span>PLTD Mindiptana</span></h1>
+                </div>
+            </div>
+            <span class="tag-wilayah">Perbatasan PNG</span>
+        </div>
+
+        <!-- NAVIGASI MENU ATAS -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a href="index.html">🏠 Beranda</a>
+                <a href="status.html" class="active">💡 Status Listrik</a>
+                <a href="jadwal.html">📅 Jadwal Perbaikan</a>
+                <a href="pengaduan.html">📝 Lapor Lampu Mati</a>
+                <a href="profil.html">🏢 Profil PLTD</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner Sambutan Halaman Status -->
+    <section class="page-banner">
+        <h2>Informasi Status Listrik Real-Time</h2>
+        <p>Pantau status mesin pembangkit dan distribusi listrik wilayah Distrik Mindiptana</p>
+    </section>
+
+    <!-- Konten Utama -->
+    <main class="main-container">
+
+        <!-- Ringkasan Mesin Utama -->
+        <div class="card-pembangkit">
+            <h3>⚙️ Kondisi Pembangkit PLTD</h3>
+            <div class="grid-info-mesin">
+                <div class="box-info-item">
+                    <span class="title">Mesin Beroperasi</span>
+                    <span class="val">2 Unit Aktif</span>
+                </div>
+                <div class="box-info-item">
+                    <span class="title">Beban Sistem</span>
+                    <span class="val">Normal</span>
+                </div>
+                <div class="box-info-item">
+                    <span class="title">Status Cadangan</span>
+                    <span class="val">1 Unit Standby</span>
+                </div>
+                <div class="box-info-item">
+                    <span class="title">Terakhir Diperbarui</span>
+                    <span class="val">Hari Ini, 08:00 WIT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Nyala Per Kampung -->
+        <div class="section-title">Status Kelistrikan Per Kampung</div>
+        <div class="kampung-list">
+
+            <div class="kampung-card">
+                <div>
+                    <div class="kampung-name">Kampung Mindiptana (Pusat)</div>
+                    <div class="kampung-sub">Area Pasar & Kantor Distrik</div>
+                </div>
+                <div class="badge-status status-nyala">
+                    <span class="dot dot-green"></span> NYALA NORMAL
+                </div>
+            </div>
+
+            <div class="kampung-card">
+                <div>
+                    <div class="kampung-name">Kampung Imko</div>
+                    <div class="kampung-sub">Jalur Jaringan Utama</div>
+                </div>
+                <div class="badge-status status-nyala">
+                    <span class="dot dot-green"></span> NYALA NORMAL
+                </div>
+            </div>
+
+            <div class="kampung-card">
+                <div>
+                    <div class="kampung-name">Kampung Osso</div>
+                    <div class="kampung-sub">Area Pemukiman Perbatasan</div>
+                </div>
+                <div class="badge-status status-nyala">
+                    <span class="dot dot-green"></span> NYALA NORMAL
+                </div>
+            </div>
+
+            <div class="kampung-card">
+                <div>
+                    <div class="kampung-name">Kampung Tinggam</div>
+                    <div class="kampung-sub">Jalur Jaringan Luar</div>
+                </div>
+                <div class="badge-status status-nyala">
+                    <span class="dot dot-green"></span> NYALA NORMAL
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Catatan dari Petugas Posko -->
+        <div class="catatan-box">
+            <h4>📌 Catatan Petugas Posko Jaga:</h4>
+            <p>Seluruh unit pembangkit dalam kondisi prima dan jaringan distribusi berfungsi lancar. Apabila ada padam lokal di rumah Anda saja, segera lakukan pelaporan melalui halaman <strong>Lapor Lampu Mati</strong>.</p>
+        </div>
+
+        <!-- Tombol Bantuan WhatsApp Posko -->
+        <a href="https://wa.me/6281234567890?text=Halo%20Posko%20PLTD%20Mindiptana,%20saya%20mau%20tanya%20status%20listrik." target="_blank" class="btn-wa-posko">
+            💬 Tanyakan Status Listrik via WhatsApp
+        </a>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>PLN PLTD Distrik Mindiptana</strong></p>
+        <p style="margin-top: 5px;">Sub Rayon Tanah Merah — Wilayah Perbatasan RI - PNG</p>
+        <p style="margin-top: 10px; font-size: 0.75rem; color: #64748b;">&copy; 2026 Layanan Informasi Kelistrikan Masyarakat Kampung.</p>
+    </footer>
+
+</body>
+</html>
